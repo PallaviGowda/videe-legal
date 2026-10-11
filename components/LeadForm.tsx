@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { services, additionalServices } from "@/lib/services";
 import { submitLead } from "@/lib/submitLead";
+import WhatsAppCta from "./WhatsAppCta";
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
@@ -39,6 +40,11 @@ export default function LeadForm({ variant = "consultation" }: { variant?: "cons
         <p className="mt-2 text-slate-700">
           We have received your request and will get back to you within one business day.
         </p>
+        <WhatsAppCta
+          label="Need a faster reply? WhatsApp us"
+          message="Hello Videe Legal, I just submitted a consultation request on your website."
+          className="mt-6"
+        />
       </div>
     );
   }

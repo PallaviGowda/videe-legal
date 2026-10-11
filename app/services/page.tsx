@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ConsultBand from "@/components/ConsultBand";
 import CtaSection from "@/components/CtaSection";
 import PageHero from "@/components/PageHero";
 import ServiceCard from "@/components/ServiceCard";
@@ -8,7 +9,7 @@ import { additionalServices, services } from "@/lib/services";
 export const metadata: Metadata = {
   title: "DPDP Compliance Services",
   description:
-    "DPDP gap assessments, privacy policy drafting, consent management, privacy impact assessments, vendor privacy assessments and privacy awareness training.",
+    "DPDP gap assessments, privacy policy drafting, consent management, data processing agreement drafting, privacy impact assessments and vendor privacy assessments.",
   alternates: { canonical: "/services" },
 };
 
@@ -49,6 +50,7 @@ export default function ServicesPage() {
           </ul>
         </div>
       </section>
+      <ConsultBand title="Which service is right for you?" />
       <CtaSection />
     </>
   );

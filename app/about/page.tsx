@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import ConsultBand from "@/components/ConsultBand";
 import PageHero from "@/components/PageHero";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -8,25 +9,6 @@ export const metadata: Metadata = {
     "Videe Legal combines 15+ years of IT industry experience with legal expertise to deliver practical DPDP Act compliance advisory.",
   alternates: { canonical: "/about" },
 };
-
-const strengths = [
-  {
-    title: "15+ Years IT Industry Experience",
-    text: "Deep understanding of enterprise systems, software delivery and how personal data moves through technology.",
-  },
-  {
-    title: "Legal Expertise",
-    text: "Sound interpretation of the DPDP Act, the DPDP Rules and related regulatory requirements.",
-  },
-  {
-    title: "Technology + Law Combined",
-    text: "We bridge the gap between legal teams and engineering teams, translating obligations into workable controls.",
-  },
-  {
-    title: "Practical, Business-Focused Advisory",
-    text: "Right-sized recommendations that protect your business without unnecessary cost or complexity.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -70,22 +52,19 @@ export default function AboutPage() {
       </section>
       <section className="bg-slate-50 py-20">
         <div className="container-page">
-          <h2 className="section-title text-center">What makes us different</h2>
+          <p className="eyebrow text-center text-gold-600">Our Expertise</p>
+          <h2 className="section-title mt-3 text-center">What makes us different</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {strengths.map((s) => (
+            {site.expertise.map((s) => (
               <div key={s.title} className="rounded-2xl border-l-4 border-gold-400 bg-white p-7 shadow-sm">
                 <h3 className="text-lg font-semibold text-navy-900">{s.title}</h3>
                 <p className="mt-2 leading-relaxed text-slate-600">{s.text}</p>
               </div>
             ))}
           </div>
-          <div className="mt-12 text-center">
-            <Link href="/contact#book" className="btn-primary">
-              Book a Consultation
-            </Link>
-          </div>
         </div>
       </section>
+      <ConsultBand title="Let's make your business DPDP ready" />
     </>
   );
 }

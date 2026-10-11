@@ -1,8 +1,20 @@
 import Link from "next/link";
+import ConsultBand from "@/components/ConsultBand";
 import CtaSection from "@/components/CtaSection";
+import FaqSection from "@/components/FaqSection";
+import ExpertiseSection, { BrandMark } from "@/components/ExpertiseSection";
+import PostCard from "@/components/PostCard";
 import ServiceCard from "@/components/ServiceCard";
-import { articles } from "@/lib/articles";
+import TrustPoints from "@/components/TrustPoints";
+import WhatsAppCta from "@/components/WhatsAppCta";
+import { getAllPosts } from "@/lib/blog";
 import { services } from "@/lib/services";
+
+const urgency = [
+  { value: "Up to ₹250 crore", text: "Maximum penalty for certain failures, such as inadequate security safeguards leading to a data breach." },
+  { value: "DPDP Rules, 2025", text: "Notified with phased timelines — organisations need to prepare their processes now." },
+  { value: "Every business", text: "Handling digital personal data of customers, users or employees in India is within scope." },
+];
 
 const highlights = [
   { value: "15+", label: "Years of IT industry experience" },
@@ -15,7 +27,7 @@ const steps = [
   { title: "Discover", text: "Understand your business, data flows and current privacy practices." },
   { title: "Assess", text: "Identify gaps against DPDP obligations and prioritise risks." },
   { title: "Implement", text: "Draft policies, design consent journeys and embed controls." },
-  { title: "Sustain", text: "Train teams and provide ongoing advisory as your business grows." },
+  { title: "Sustain", text: "Provide ongoing advisory and periodic reviews as your business grows." },
 ];
 
 export default function HomePage() {
@@ -31,14 +43,23 @@ export default function HomePage() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-200">
               Helping organisations build privacy-first businesses through practical and legally compliant solutions.
             </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Link href="/contact#book" className="btn-gold">
                 Book Consultation
               </Link>
+              <WhatsAppCta />
               <Link href="#checklist" className="btn-outline">
                 Get Free DPDP Checklist
               </Link>
             </div>
+            <TrustPoints light className="mt-6" />
+            <Link href="#expertise" className="mt-8 flex max-w-md items-center gap-4 rounded-2xl border border-white/15 bg-white/5 p-3 pr-5 transition hover:border-gold-400">
+              <BrandMark className="h-14 w-14" />
+              <span className="text-sm">
+                <span className="block font-semibold text-white">Technology + Law Expertise</span>
+                <span className="text-slate-300">15+ years of IT industry experience with legal expertise in data protection</span>
+              </span>
+            </Link>
           </div>
           <div className="lg:col-span-2">
             <div className="rounded-2xl border border-white/15 bg-white/5 p-7 backdrop-blur">
@@ -58,6 +79,9 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
+              <Link href="/contact#book" className="btn-gold mt-7 w-full">
+                Find Out in a Discovery Call
+              </Link>
             </div>
           </div>
         </div>
@@ -71,6 +95,23 @@ export default function HomePage() {
               <p className="mt-1 text-sm text-slate-600">{h.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow text-gold-600">Why Act Now</p>
+            <h2 className="section-title mt-3">DPDP compliance is no longer optional</h2>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {urgency.map((item) => (
+              <div key={item.value} className="rounded-2xl border-t-4 border-gold-400 bg-navy-950 p-7 text-white shadow-lg">
+                <p className="font-serif text-2xl font-semibold text-gold-300">{item.value}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -97,7 +138,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <ExpertiseSection />
+
+      <section className="border-t border-slate-100 bg-white py-20">
         <div className="container-page grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="eyebrow text-gold-600">Why Videe Legal</p>
@@ -127,31 +170,25 @@ export default function HomePage() {
         <div className="container-page">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p className="eyebrow text-gold-600">Resource Center</p>
+              <p className="eyebrow text-gold-600">Blog</p>
               <h2 className="section-title mt-3">Latest DPDP insights</h2>
             </div>
-            <Link href="/resources" className="font-semibold text-navy-700 hover:text-gold-600">
-              Browse all articles →
+            <Link href="/blog" className="font-semibold text-navy-700 hover:text-gold-600">
+              View all posts →
             </Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {articles.slice(0, 3).map((article) => (
-              <Link
-                key={article.slug}
-                href={`/resources/${article.slug}`}
-                className="group rounded-2xl border border-slate-200 bg-white p-7 transition hover:border-gold-300 hover:shadow-lg"
-              >
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{article.readTime}</p>
-                <h3 className="mt-3 font-serif text-xl font-semibold text-navy-900 group-hover:text-navy-700">
-                  {article.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{article.excerpt}</p>
-              </Link>
-            ))}
+            {getAllPosts()
+              .slice(0, 3)
+              .map((post) => (
+                <PostCard key={post.slug} post={post} />
+              ))}
           </div>
         </div>
       </section>
 
+      <FaqSection />
+      <ConsultBand />
       <CtaSection />
     </>
   );

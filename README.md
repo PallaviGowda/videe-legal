@@ -6,12 +6,12 @@ Consulting website for Videe Legal, a DPDP Act compliance and privacy consulting
 
 ## Features
 
-- Pages: Home, About, Services, Resource Center (blog), Contact
-- Book Consultation and Contact forms (Formspree, with email fallback)
+- Pages: Home, About, Services, Blog, Contact
+- Book Consultation form (Formspree, with email fallback)
 - DPDP Readiness Checklist lead magnet (email capture → printable/PDF checklist)
-- Blog/Resource Center with statically generated article pages
-- SEO: per-page metadata, Open Graph/Twitter tags, canonical URLs, JSON-LD, `sitemap.xml`, `robots.txt`
-- WhatsApp floating button
+- Markdown-powered blog (`content/blog/*.md`) with statically generated post pages
+- SEO: per-page metadata, Open Graph/Twitter tags, canonical URLs, JSON-LD (incl. FAQ and BlogPosting), `sitemap.xml`, `robots.txt`
+- WhatsApp Business buttons (header, hero, floating button, mobile action bar)
 - Mobile responsive blue, white and gold legal-tech design
 
 ## Folder structure
@@ -22,24 +22,26 @@ app/
   page.tsx                Home
   about/page.tsx          About
   services/page.tsx       Services
-  resources/page.tsx      Resource Center (article list)
-  resources/[slug]/       Article pages
+  blog/page.tsx           Blog (post list)
+  blog/[slug]/            Blog post pages
   contact/page.tsx        Contact + Book Consultation
   dpdp-checklist/         Free DPDP Readiness Checklist (printable)
   sitemap.ts, robots.ts   SEO files
   icon.svg                Favicon
-components/               Header, Footer, forms, cards, WhatsApp button
+components/               Header, Footer, forms, cards, WhatsApp buttons
+content/blog/             Blog posts as Markdown files
 lib/
-  site.ts                 Site config (name, URL, contact details)
+  site.ts                 Site config (contact details, expertise, trust points)
   services.ts             Services content
-  articles.ts             Blog articles content
+  blog.ts                 Reads and renders blog posts
+  faqs.ts                 FAQ content
   checklist.ts            Checklist content
   submitLead.ts           Form submission logic
 ```
 
 ## Getting started
 
-Requires Node.js 18.18+ (Node 20+ recommended).
+Requires Node.js 22.
 
 ```bash
 npm install
@@ -57,15 +59,17 @@ npm start       # run production build
 
 ## Configuration
 
-Set these in `.env.local` (locally) and in Vercel → Project → Settings → Environment Variables:
+Contact details have built-in defaults in `lib/site.ts`. Set these in `.env.local` (locally) or in Vercel → Project → Settings → Environment Variables only to override them:
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Live domain, e.g. `https://videelegal.com` |
-| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | Formspree endpoint, e.g. `https://formspree.io/f/xxxxxxx` |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email |
-| `NEXT_PUBLIC_LINKEDIN_URL` | LinkedIn page URL |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number, digits only with country code (e.g. `919876543210`). Button is hidden if empty. |
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Live domain | `https://videelegal.com` |
+| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | Formspree endpoint, e.g. `https://formspree.io/f/xxxxxxx` | none (forms open email client) |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email | `info@videelegal.com` |
+| `NEXT_PUBLIC_LINKEDIN_URL` | Company LinkedIn page | `https://www.linkedin.com/company/146645610/` |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp Business number, digits only with country code | `918618744390` |
+
+Values are baked in at build time, so redeploy after changing them.
 
 ### Forms and leads
 
@@ -73,14 +77,37 @@ Set these in `.env.local` (locally) and in Vercel → Project → Settings → E
 2. Copy the endpoint URL into `NEXT_PUBLIC_FORMSPREE_ENDPOINT`.
 3. Submissions arrive by email; from Formspree you can forward leads to Google Sheets, HubSpot or other CRMs via its integrations.
 
-Each submission includes a `formType` field (`consultation`, `contact` or `checklist-download`) so you can filter leads. If no endpoint is configured, forms open the visitor's email client instead.
+Each submission includes a `formType` field (`consultation` or `checklist-download`) so you can filter leads. If no endpoint is configured, forms open the visitor's email client instead.
+
+## Writing blog posts
+
+Posts live in `content/blog/` as Markdown (`.md`) files. The file name becomes the URL: `content/blog/dpa-checklist.md` → `/blog/dpa-checklist`.
+
+1. Copy `content/blog/_template.md` and rename it (lowercase words separated by hyphens).
+2. Fill in the details at the top:
+
+   ```markdown
+   ---
+   title: "Your post title"
+   description: "Short summary shown on cards and in Google results."
+   date: "2026-10-15"
+   tags: DPDP Act, Consent
+   ---
+   ```
+
+   Optional fields: `author` (defaults to "Videe Legal Team") and `draft: true` (hides the post).
+3. Write the post below the `---` line using Markdown (`## Heading`, `- bullet`, `**bold**`, `[link](https://...)`).
+4. Commit and push. Vercel rebuilds the site, and the post appears on `/blog`, on the home page (latest 3) and in `sitemap.xml`.
+
+You can also add or edit files directly on GitHub (**Add file → Create new file** in `content/blog/`). Files starting with `_` are never published. Posts are newest first by `date`.
 
 ## Editing content
 
 - Services: `lib/services.ts`
-- Articles: `lib/articles.ts` (add an object to publish a new article; it is added to the sitemap automatically)
+- Blog posts: `content/blog/*.md` (see above)
 - Checklist: `lib/checklist.ts`
-- Contact details and SEO defaults: `lib/site.ts` / environment variables
+- Contact details, expertise points, trust points and SEO defaults: `lib/site.ts`
+- FAQs: `lib/faqs.ts`
 
 ## Deployment (GitHub + Vercel)
 
@@ -95,7 +122,7 @@ git push -u origin main
 
 1. Sign in to [vercel.com](https://vercel.com) with GitHub and click **Add New → Project**.
 2. Import the `videe-legal` repository (framework is auto-detected as Next.js).
-3. Add the environment variables above and click **Deploy**.
+3. Optionally add the environment variables above, then click **Deploy**.
 4. Under **Settings → Domains**, add `videelegal.com` (or `.in`) and update DNS records at your registrar as instructed. SSL is issued automatically.
 5. Submit `https://videelegal.com/sitemap.xml` in Google Search Console.
 

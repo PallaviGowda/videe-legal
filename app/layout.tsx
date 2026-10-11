@@ -45,12 +45,20 @@ const organizationJsonLd = {
   areaServed: "IN",
   sameAs: [site.linkedin],
   knowsAbout: ["Digital Personal Data Protection Act, 2023", "Privacy compliance", "Data protection"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: site.email,
+    ...(site.whatsapp && { telephone: `+${site.whatsapp}` }),
+    areaServed: "IN",
+    availableLanguage: ["English"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN">
-      <body>
+      <body className="pb-14 md:pb-0">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2"

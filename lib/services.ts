@@ -44,16 +44,16 @@ export const services: Service[] = [
     icon: "M5 13l4 4L19 7",
   },
   {
-    slug: "privacy-awareness-training",
-    title: "Privacy Awareness Training",
+    slug: "dpa-drafting",
+    title: "Data Processing Agreement Drafting",
     summary:
-      "Customised privacy workshops that help employees handle personal data responsibly in day-to-day work.",
+      "Drafting and reviewing data processing agreements (DPAs) with vendors and processors, aligned with DPDP Act obligations.",
     deliverables: [
-      "Role-based training for leadership and teams",
-      "Interactive workshops and case studies",
-      "Training material and attendance records",
+      "DPDP-aligned DPA templates and clauses",
+      "Review and negotiation support for vendor DPAs",
+      "Processor obligations for security, breach notification and erasure",
     ],
-    icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z",
   },
   {
     slug: "privacy-impact-assessment",
@@ -74,7 +74,7 @@ export const services: Service[] = [
       "Evaluate third-party vendors and data processors from a privacy and compliance perspective.",
     deliverables: [
       "Vendor privacy due-diligence questionnaires",
-      "Data processing agreement review",
+      "Data flow and access review for third parties",
       "Vendor risk rating and monitoring plan",
     ],
     icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",

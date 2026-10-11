@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navLinks } from "@/lib/site";
+import { navLinks, whatsappUrl } from "@/lib/site";
 import Logo from "./Logo";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,9 +14,16 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div className="bg-navy-950 text-center text-xs text-slate-200 sm:text-sm">
+        <Link href="/contact#book" className="container-page block py-2 hover:text-white">
+          <span className="hidden sm:inline">The DPDP Rules, 2025 are notified. Is your business ready? </span>
+          <span className="sm:hidden">Is your business DPDP ready? </span>
+          <span className="font-semibold text-gold-400">Book a discovery call →</span>
+        </Link>
+      </div>
       <div className="container-page flex h-16 items-center justify-between">
         <Logo />
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -27,6 +35,17 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          {whatsappUrl() && (
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat on WhatsApp"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:bg-[#1ebe5a]"
+            >
+              <WhatsAppIcon />
+            </a>
+          )}
           <Link href="/contact#book" className="btn-primary px-5 py-2.5 text-sm">
             Book Consultation
           </Link>

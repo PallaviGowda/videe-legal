@@ -1,16 +1,16 @@
 import type { MetadataRoute } from "next";
-import { articles } from "@/lib/articles";
+import { getAllPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/about", "/services", "/resources", "/contact"].map((path) => ({
+  const pages = ["", "/about", "/services", "/blog", "/contact"].map((path) => ({
     url: `${site.url}${path}`,
-    changeFrequency: "monthly" as const,
+    changeFrequency: path === "/blog" ? ("weekly" as const) : ("monthly" as const),
     priority: path === "" ? 1 : 0.8,
   }));
-  const posts = articles.map((article) => ({
-    url: `${site.url}/resources/${article.slug}`,
-    lastModified: new Date(article.date),
+  const posts = getAllPosts().map((post) => ({
+    url: `${site.url}/blog/${post.slug}`,
+    ...(post.date && { lastModified: new Date(post.date) }),
     changeFrequency: "yearly" as const,
     priority: 0.6,
   }));

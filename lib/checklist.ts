@@ -57,10 +57,10 @@ export const checklist = [
     ],
   },
   {
-    area: "Awareness",
+    area: "Privacy by Design",
     items: [
-      "Employees receive regular privacy awareness training",
       "Privacy-by-design is part of product and project processes",
+      "Roles and responsibilities for handling personal data are defined",
     ],
   },
 ];
