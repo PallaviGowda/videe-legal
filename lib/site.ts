@@ -8,6 +8,12 @@ export const site = {
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/company/146645610/",
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918618744390").replace(/\D/g, ""),
   formEndpoint: process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "",
+  bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL || "",
+  grievanceOfficer: {
+    name: process.env.NEXT_PUBLIC_GRIEVANCE_OFFICER_NAME || "",
+    email: process.env.NEXT_PUBLIC_GRIEVANCE_EMAIL || process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@videelegal.com",
+  },
+  privacyNoticeUpdated: "2026-10-25",
   whatsappMessage: "Hello Videe Legal, I would like to know more about DPDP compliance for my business.",
   expertise: [
     {
@@ -32,6 +38,24 @@ export const site = {
     "Response within one business day",
     "Free initial discovery call",
     "Advice from experienced privacy professionals",
+  ],
+  personas: [
+    {
+      title: "B2B SaaS & Tech Companies",
+      text: "Answer enterprise privacy questionnaires with confidence, sign DPAs faster and shorten security reviews in sales cycles.",
+    },
+    {
+      title: "D2C, E-commerce & Consumer Apps",
+      text: "Get privacy notices, consent flows and grievance handling right for high volumes of customer data.",
+    },
+    {
+      title: "Startups & SMEs",
+      text: "Right-sized DPDP compliance that fits your stage and budget, built in early instead of retrofitted later.",
+    },
+    {
+      title: "Enterprises & Their Vendors",
+      text: "Map data flows across teams and third parties, manage processor risk and keep contracts aligned with the DPDP Act.",
+    },
   ],
   keywords: [
     "DPDP Act",

@@ -3,12 +3,15 @@ import ConsultBand from "@/components/ConsultBand";
 import CtaSection from "@/components/CtaSection";
 import FaqSection from "@/components/FaqSection";
 import ExpertiseSection, { BrandMark } from "@/components/ExpertiseSection";
+import BookingCta from "@/components/BookingCta";
+import Methodology from "@/components/Methodology";
 import PostCard from "@/components/PostCard";
 import ServiceCard from "@/components/ServiceCard";
 import TrustPoints from "@/components/TrustPoints";
 import WhatsAppCta from "@/components/WhatsAppCta";
 import { getAllPosts } from "@/lib/blog";
 import { services } from "@/lib/services";
+import { site } from "@/lib/site";
 
 const urgency = [
   { value: "Up to ₹250 crore", text: "Maximum penalty for certain failures, such as inadequate security safeguards leading to a data breach." },
@@ -23,30 +26,25 @@ const highlights = [
   { value: "Practical", label: "Business-first recommendations" },
 ];
 
-const steps = [
-  { title: "Discover", text: "Understand your business, data flows and current privacy practices." },
-  { title: "Assess", text: "Identify gaps against DPDP obligations and prioritise risks." },
-  { title: "Implement", text: "Draft policies, design consent journeys and embed controls." },
-  { title: "Sustain", text: "Provide ongoing advisory and periodic reviews as your business grows." },
-];
-
 export default function HomePage() {
   return (
     <>
       <section className="hero-bg text-white">
         <div className="container-page grid gap-12 py-20 md:py-28 lg:grid-cols-5 lg:items-center">
           <div className="lg:col-span-3">
-            <p className="eyebrow text-gold-400">DPDP Act Compliance Consulting</p>
+            <p className="eyebrow text-gold-400">Techno-Legal DPDP Compliance</p>
             <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Navigate India&apos;s DPDP Act with Confidence
+              DPDP compliance that works in your product, not just on paper
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-200">
-              Helping organisations build privacy-first businesses through practical and legally compliant solutions.
+              We bridge India&apos;s DPDP Act and engineering reality — privacy notices, consent architecture, vendor
+              DPAs and data flows — so you avoid penalties, close enterprise deals faster and earn customer trust.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Link href="/contact#book" className="btn-gold">
-                Book Consultation
+                Book a Free Discovery Call
               </Link>
+              <BookingCta label="Pick a Time" />
               <WhatsAppCta />
               <Link href="#checklist" className="btn-outline">
                 Get Free DPDP Checklist
@@ -138,33 +136,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ExpertiseSection />
-
-      <section className="border-t border-slate-100 bg-white py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="eyebrow text-gold-600">Why Videe Legal</p>
-            <h2 className="section-title mt-3">Where technology meets law</h2>
-            <p className="mt-5 leading-relaxed text-slate-600">
-              Unlike traditional law firms, we combine over 15 years of IT industry experience with legal expertise.
-              We understand how your systems, products and data actually work — so our advice is practical,
-              implementable and aligned with your business goals.
-            </p>
-            <Link href="/about" className="btn-primary mt-8">
-              Learn About Us
-            </Link>
+      <section className="bg-white py-20">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow text-gold-600">Who We Help</p>
+            <h2 className="section-title mt-3">Built for teams that handle personal data every day</h2>
           </div>
-          <ol className="grid gap-5 sm:grid-cols-2">
-            {steps.map((step, i) => (
-              <li key={step.title} className="rounded-2xl border border-slate-200 p-6">
-                <span className="font-serif text-3xl font-semibold text-gold-500">0{i + 1}</span>
-                <h3 className="mt-2 text-lg font-semibold text-navy-900">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.text}</p>
-              </li>
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {site.personas.map((persona) => (
+              <div key={persona.title} className="rounded-2xl border border-slate-200 p-6 transition hover:border-gold-300 hover:shadow-lg">
+                <span className="block h-1 w-10 rounded-full bg-gold-400" />
+                <h3 className="mt-4 text-lg font-semibold text-navy-900">{persona.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{persona.text}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
+
+      <Methodology className="bg-slate-50" />
+
+      <ExpertiseSection />
 
       <section className="bg-slate-50 py-20">
         <div className="container-page">

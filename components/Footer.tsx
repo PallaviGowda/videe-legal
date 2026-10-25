@@ -46,7 +46,16 @@ export default function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-slate-400 md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} Videe Legal. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Videe Legal. All rights reserved. ·{" "}
+            <Link href="/privacy-notice" className="underline-offset-4 hover:text-white hover:underline">
+              Privacy Notice
+            </Link>{" "}
+            ·{" "}
+            <a href={`mailto:${site.grievanceOfficer.email}`} className="underline-offset-4 hover:text-white hover:underline">
+              Grievance Officer
+            </a>
+          </p>
           <p>Information on this website is general in nature and does not constitute legal advice.</p>
         </div>
       </div>

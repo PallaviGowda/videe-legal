@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { services, additionalServices } from "@/lib/services";
 import { submitLead } from "@/lib/submitLead";
+import BookingCta from "./BookingCta";
 import WhatsAppCta from "./WhatsAppCta";
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
@@ -40,11 +42,13 @@ export default function LeadForm({ variant = "consultation" }: { variant?: "cons
         <p className="mt-2 text-slate-700">
           We have received your request and will get back to you within one business day.
         </p>
-        <WhatsAppCta
-          label="Need a faster reply? WhatsApp us"
-          message="Hello Videe Legal, I just submitted a consultation request on your website."
-          className="mt-6"
-        />
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <BookingCta label="Pick a time now" className="btn-primary" />
+          <WhatsAppCta
+            label="Need a faster reply? WhatsApp us"
+            message="Hello Videe Legal, I just submitted a consultation request on your website."
+          />
+        </div>
       </div>
     );
   }
@@ -54,19 +58,23 @@ export default function LeadForm({ variant = "consultation" }: { variant?: "cons
       <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <label className="block">
         <span className="mb-1 block text-sm font-medium text-slate-700">Name *</span>
-        <input name="name" required autoComplete="name" className={inputClass} placeholder="Your full name" />
+        <input name="name" required maxLength={100} autoComplete="name" className={inputClass} placeholder="Your full name" />
       </label>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-slate-700">Company</span>
-        <input name="company" autoComplete="organization" className={inputClass} placeholder="Company name" />
+        <span className="mb-1 block text-sm font-medium text-slate-700">
+          Company <span className="font-normal text-slate-400">(optional)</span>
+        </span>
+        <input name="company" autoComplete="organization" maxLength={150} className={inputClass} placeholder="Company name" />
       </label>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-slate-700">Email *</span>
-        <input name="email" type="email" required autoComplete="email" className={inputClass} placeholder="you@company.com" />
+        <span className="mb-1 block text-sm font-medium text-slate-700">Work email *</span>
+        <input name="email" type="email" required maxLength={200} autoComplete="email" className={inputClass} placeholder="you@company.com" />
       </label>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-slate-700">Phone</span>
-        <input name="phone" type="tel" autoComplete="tel" className={inputClass} placeholder="+91" />
+        <span className="mb-1 block text-sm font-medium text-slate-700">
+          Phone <span className="font-normal text-slate-400">(optional, for a call back)</span>
+        </span>
+        <input name="phone" type="tel" maxLength={20} pattern="[0-9+()\- ]{7,20}" autoComplete="tel" className={inputClass} placeholder="+91" />
       </label>
       {isConsultation && (
         <label className="block sm:col-span-2">
@@ -89,12 +97,17 @@ export default function LeadForm({ variant = "consultation" }: { variant?: "cons
           name="requirement"
           required
           rows={4}
+          maxLength={2000}
           className={inputClass}
-          placeholder="Tell us briefly about your organisation and privacy needs"
+          placeholder="Tell us briefly about your organisation and privacy needs. Please don't include sensitive personal data."
         />
       </label>
       <p className="text-xs text-slate-500 sm:col-span-2">
-        By submitting this form, you agree that Videe Legal may use your details to respond to your enquiry.
+        We use these details only to respond to your enquiry and will never sell them. See our{" "}
+        <Link href="/privacy-notice" className="font-medium text-navy-700 underline underline-offset-2">
+          Privacy Notice
+        </Link>{" "}
+        to learn how we handle your data and how to exercise your rights.
       </p>
       <div className="sm:col-span-2">
         <button type="submit" disabled={status === "sending"} className="btn-primary w-full sm:w-auto">

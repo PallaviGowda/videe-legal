@@ -3,10 +3,10 @@ import { getAllPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/about", "/services", "/blog", "/contact"].map((path) => ({
+  const pages = ["", "/about", "/services", "/blog", "/contact", "/privacy-notice"].map((path) => ({
     url: `${site.url}${path}`,
     changeFrequency: path === "/blog" ? ("weekly" as const) : ("monthly" as const),
-    priority: path === "" ? 1 : 0.8,
+    priority: path === "" ? 1 : path === "/privacy-notice" ? 0.3 : 0.8,
   }));
   const posts = getAllPosts().map((post) => ({
     url: `${site.url}/blog/${post.slug}`,

@@ -68,6 +68,9 @@ Contact details have built-in defaults in `lib/site.ts`. Set these in `.env.loca
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email | `info@videelegal.com` |
 | `NEXT_PUBLIC_LINKEDIN_URL` | Company LinkedIn page | `https://www.linkedin.com/company/146645610/` |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp Business number, digits only with country code | `918618744390` |
+| `NEXT_PUBLIC_BOOKING_URL` | Cal.com / Calendly booking page; shows "Pick a time" buttons | none (buttons hidden) |
+| `NEXT_PUBLIC_GRIEVANCE_OFFICER_NAME` | Grievance Officer name shown in the Privacy Notice | none |
+| `NEXT_PUBLIC_GRIEVANCE_EMAIL` | Grievance Officer email | contact email |
 
 Values are baked in at build time, so redeploy after changing them.
 
@@ -106,7 +109,9 @@ You can also add or edit files directly on GitHub (**Add file → Create new fil
 - Services: `lib/services.ts`
 - Blog posts: `content/blog/*.md` (see above)
 - Checklist: `lib/checklist.ts`
-- Contact details, expertise points, trust points and SEO defaults: `lib/site.ts`
+- Contact details, expertise points, trust points, personas ("Who we help") and SEO defaults: `lib/site.ts`
+- Methodology steps, engagement models and scope (included / not included): `lib/services.ts`
+- Privacy Notice: `app/privacy-notice/page.tsx` — update `privacyNoticeUpdated` in `lib/site.ts` whenever you change it, and update the processor list if you add analytics, a CRM or other tools
 - FAQs: `lib/faqs.ts`
 
 ## Deployment (GitHub + Vercel)

@@ -2,6 +2,7 @@ export type Service = {
   slug: string;
   title: string;
   summary: string;
+  idealFor: string;
   deliverables: string[];
   icon: string;
 };
@@ -12,6 +13,7 @@ export const services: Service[] = [
     title: "DPDP Gap Assessment",
     summary:
       "Understand your organisation's current compliance posture and identify gaps against DPDP Act requirements.",
+    idealFor: "Organisations starting their DPDP journey or preparing for enterprise customer audits",
     deliverables: [
       "Personal data inventory and data-flow mapping",
       "Gap analysis report against DPDP obligations",
@@ -24,6 +26,7 @@ export const services: Service[] = [
     title: "Privacy Policy Drafting",
     summary:
       "Clear website and application privacy notices aligned with DPDP requirements and written in plain language.",
+    idealFor: "Websites, mobile apps and SaaS products collecting customer or user data",
     deliverables: [
       "Website and mobile app privacy notices",
       "Cookie and tracking disclosures",
@@ -36,6 +39,7 @@ export const services: Service[] = [
     title: "Consent Management Framework",
     summary:
       "Design and implementation advisory for capturing, recording and withdrawing consent across your digital journeys.",
+    idealFor: "Product and engineering teams building sign-up, checkout and marketing journeys",
     deliverables: [
       "Consent journey design and notice wording",
       "Consent register and withdrawal process",
@@ -48,6 +52,7 @@ export const services: Service[] = [
     title: "Data Processing Agreement Drafting",
     summary:
       "Drafting and reviewing data processing agreements (DPAs) with vendors and processors, aligned with DPDP Act obligations.",
+    idealFor: "SaaS providers and businesses sharing personal data with vendors or processors",
     deliverables: [
       "DPDP-aligned DPA templates and clauses",
       "Review and negotiation support for vendor DPAs",
@@ -60,6 +65,7 @@ export const services: Service[] = [
     title: "Privacy Impact Assessment",
     summary:
       "Assess privacy risks of new products, processes and technologies before launch, including data protection impact assessments.",
+    idealFor: "Teams launching new products, AI features or high-risk data processing",
     deliverables: [
       "Processing activity risk analysis",
       "Mitigation controls and recommendations",
@@ -72,6 +78,7 @@ export const services: Service[] = [
     title: "Vendor Privacy Assessment",
     summary:
       "Evaluate third-party vendors and data processors from a privacy and compliance perspective.",
+    idealFor: "Companies relying on cloud, marketing, HR or payment vendors",
     deliverables: [
       "Vendor privacy due-diligence questionnaires",
       "Data flow and access review for third parties",
@@ -87,3 +94,62 @@ export const additionalServices = [
   "Website Privacy Compliance Reviews",
   "Ongoing Privacy Retainership",
 ];
+
+export const methodology = [
+  {
+    title: "Data Discovery",
+    text: "Workshops with product, engineering and business teams to map what personal data you collect, where it flows and who it is shared with.",
+    output: "Data inventory & data-flow map",
+  },
+  {
+    title: "Gap Mapping",
+    text: "Each processing activity assessed against DPDP Act and Rules obligations, with risks ranked by impact and effort.",
+    output: "Gap report & prioritised roadmap",
+  },
+  {
+    title: "Remediation",
+    text: "Practical fixes across legal and technical layers: notices, consent architecture, retention, security safeguards and vendor DPAs.",
+    output: "Policies, DPAs & system recommendations",
+  },
+  {
+    title: "Sustain",
+    text: "Ongoing advisory, periodic reviews and support for new products, vendors and regulatory updates.",
+    output: "Review cadence & advisory support",
+  },
+];
+
+export const engagements = [
+  {
+    title: "Discovery Call",
+    tag: "Free",
+    text: "A no-obligation conversation to understand your business, the personal data you handle and where to start.",
+  },
+  {
+    title: "DPDP Quick Review",
+    tag: "Fixed scope",
+    text: "A focused review of your website or app, privacy notice and consent flows, with a short list of priority fixes.",
+  },
+  {
+    title: "Compliance Programme",
+    tag: "End-to-end",
+    text: "Full gap assessment, remediation and documentation across your organisation, delivered in clear phases.",
+  },
+  {
+    title: "Privacy Retainer",
+    tag: "Ongoing",
+    text: "On-call advisory for new products, vendor contracts, customer questionnaires and regulatory changes.",
+  },
+];
+
+export const scope = {
+  included: [
+    "Privacy notices, internal policies and data processing agreements",
+    "Data-flow mapping, gap assessments and privacy impact assessments",
+    "Consent, retention and grievance process design",
+    "Practical recommendations for product, engineering and security teams",
+  ],
+  excluded: [
+    "Litigation or representation before courts and authorities",
+    "Hands-on software development or tool implementation",
+  ],
+};

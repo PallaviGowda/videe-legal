@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BookingCta from "@/components/BookingCta";
 import { BrandMark, LinkedInButton } from "@/components/ExpertiseSection";
 import LeadForm from "@/components/LeadForm";
 import PageHero from "@/components/PageHero";
@@ -30,8 +31,8 @@ export default function ContactPage() {
       <section className="bg-slate-50 py-20">
         <div className="container-page grid gap-10 lg:grid-cols-3">
           <div id="book" className="scroll-mt-24 rounded-2xl bg-white p-7 shadow-sm md:p-10 lg:col-span-2">
-            <h2 className="section-title">Book a Consultation</h2>
-            <p className="mt-2 text-slate-600">Share a few details and we&apos;ll schedule a discovery call.</p>
+            <h2 className="section-title">Book a Free Discovery Call</h2>
+            <p className="mt-2 text-slate-600">Share a few details and we&apos;ll schedule a no-obligation call.</p>
             <TrustPoints className="mt-5" />
             <div className="mt-8">
               <LeadForm variant="consultation" />
@@ -47,6 +48,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex flex-col gap-3 p-6">
+                <BookingCta label="Pick a Time on Our Calendar" className="btn-primary" />
                 <WhatsAppCta />
                 <LinkedInButton />
                 <a href={`mailto:${site.email}`} className="text-center text-sm font-medium text-navy-700 hover:text-gold-600">

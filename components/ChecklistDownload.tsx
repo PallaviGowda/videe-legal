@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { submitLead } from "@/lib/submitLead";
@@ -26,7 +27,7 @@ export default function ChecklistDownload() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <label className="sr-only" htmlFor="checklist-name">
         Name
@@ -34,6 +35,7 @@ export default function ChecklistDownload() {
       <input
         id="checklist-name"
         name="name"
+        maxLength={100}
         required
         placeholder="Your name"
         autoComplete="name"
@@ -45,6 +47,7 @@ export default function ChecklistDownload() {
       <input
         id="checklist-email"
         name="email"
+        maxLength={200}
         type="email"
         required
         placeholder="Work email"
@@ -59,6 +62,13 @@ export default function ChecklistDownload() {
           Something went wrong. Please try again.
         </p>
       )}
+      <p className="text-xs text-slate-300 sm:basis-full">
+        We use your name and email only to share the checklist and follow up about it. See our{" "}
+        <Link href="/privacy-notice" className="font-medium text-gold-300 underline underline-offset-2">
+          Privacy Notice
+        </Link>
+        .
+      </p>
     </form>
   );
 }
